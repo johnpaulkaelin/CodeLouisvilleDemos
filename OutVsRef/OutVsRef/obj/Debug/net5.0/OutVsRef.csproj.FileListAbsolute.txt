@@ -1,0 +1,16 @@
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.csproj.AssemblyReference.cache
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.AssemblyInfoInputs.cache
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.AssemblyInfo.cs
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.csproj.CoreCompileInputs.cache
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\bin\Debug\net5.0\OutVsRef.exe
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\bin\Debug\net5.0\OutVsRef.deps.json
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\bin\Debug\net5.0\OutVsRef.runtimeconfig.json
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\bin\Debug\net5.0\OutVsRef.runtimeconfig.dev.json
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\bin\Debug\net5.0\OutVsRef.dll
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\bin\Debug\net5.0\ref\OutVsRef.dll
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\bin\Debug\net5.0\OutVsRef.pdb
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.dll
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\ref\OutVsRef.dll
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.pdb
+C:\Users\kaeljo01\Source\Repos\OutVsRef\OutVsRef\obj\Debug\net5.0\OutVsRef.genruntimeconfig.cache

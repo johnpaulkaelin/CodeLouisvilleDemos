@@ -1,0 +1,16 @@
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\bin\Debug\net5.0\StringBuilderExample.exe
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\bin\Debug\net5.0\StringBuilderExample.deps.json
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\bin\Debug\net5.0\StringBuilderExample.runtimeconfig.json
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\bin\Debug\net5.0\StringBuilderExample.runtimeconfig.dev.json
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\bin\Debug\net5.0\StringBuilderExample.dll
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\bin\Debug\net5.0\ref\StringBuilderExample.dll
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\bin\Debug\net5.0\StringBuilderExample.pdb
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.csproj.AssemblyReference.cache
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.AssemblyInfoInputs.cache
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.AssemblyInfo.cs
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.csproj.CoreCompileInputs.cache
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.dll
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\ref\StringBuilderExample.dll
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.pdb
+C:\Users\kaeljo01\Source\Repos\StringBuilderExample\StringBuilderExample\obj\Debug\net5.0\StringBuilderExample.genruntimeconfig.cache
