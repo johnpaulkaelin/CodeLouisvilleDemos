@@ -8,6 +8,6 @@ namespace ValueVsReference.Classes
 {
     public class Person
     {
-        public int Age { get; set; }
+        public byte Age { get; set; }
     }
 }

@@ -8,6 +8,21 @@ namespace ValueVsReference.Structs
 {
     public struct Person
     {
-        public int Age { get; set; }
+        public byte Age { get; set; }
+
+        //private byte _age;
+        //public byte Age { 
+        //    get
+        //    {
+        //        return _age;
+        //    }
+        //    set
+        //    {
+        //        if (value > 120)
+        //            throw new ArgumentException($"Invalid age {value}.  Age cannot be > 120.");
+
+        //        _age = value;
+        //    }         
+        //}
     }
 }

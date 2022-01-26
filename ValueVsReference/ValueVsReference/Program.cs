@@ -1,6 +1,6 @@
 ﻿using System;
-//using ValueVsReference.Structs;
-using ValueVsReference.Classes;
+using ValueVsReference.Structs;
+//using ValueVsReference.Classes;
 
 namespace ValueVsReference
 {
@@ -10,7 +10,7 @@ namespace ValueVsReference
         {
             Person p = new Person();
 
-            p.Age = 30;
+            p.Age = 25;
 
             Console.WriteLine($"p.Age = {p.Age}");
 
