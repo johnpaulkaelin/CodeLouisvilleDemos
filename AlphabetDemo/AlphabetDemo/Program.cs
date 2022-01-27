@@ -11,6 +11,16 @@ namespace AlphabetDemo
             PrintAlphabetBackwards();
 
             PrintAlphabetSkipOneLetter();
+
+            // these are just examples of same thing 
+            // using while loops instead of for loops
+
+            PrintAlphabetUsingWhileLoop();
+
+            PrintAlphabetBackwardsUsingWhileLoop();
+
+            PrintAlphabetSkipOneLetterUsingWhileLoop();
+
         }
 
         static void PrintAlphabet()
@@ -41,6 +51,59 @@ namespace AlphabetDemo
             for(char alpha = 'A'; alpha <= 'Z'; alpha = (char) (alpha + 2))
             {
                 alphabet += alpha;
+            }
+
+            Console.WriteLine(alphabet);
+        }
+
+        static void PrintAlphabetUsingWhileLoop()
+        {
+            string alphabet = string.Empty;
+            char alpha = 'A';
+            while(alpha <= 'Z')
+            {
+                alphabet += alpha++;
+
+                // above line in same as this.  C# programmers like to cram as much into one line as possible :)
+                //alphabet += alpha;
+                //alpha++;
+
+                // it's also the same as.  but you have that ugly cast operation
+                //alphabet = alphabet + alpha;
+                //alpha = (char)(alpha + 1);
+            }
+
+            Console.WriteLine(alphabet);
+        }
+
+        static void PrintAlphabetBackwardsUsingWhileLoop()
+        {
+            string alphabet = string.Empty;
+            char alpha = 'Z';
+            while(alpha >= 'A')
+            {
+                alphabet += alpha--;
+
+                // same as
+                //alphabet += alpha;
+                //alpha--;
+
+                //and
+                //alphabet = alphabet + alpha;
+                //alpha = (char)(alpha - 1);
+            }
+
+            Console.WriteLine(alphabet);
+        }
+
+        static void PrintAlphabetSkipOneLetterUsingWhileLoop()
+        {
+            string alphabet = string.Empty;
+            char alpha = 'A';
+            while (alpha <= 'Z')
+            {
+                alphabet += alpha;
+                alpha = (char)(alpha + 2);
             }
 
             Console.WriteLine(alphabet);
