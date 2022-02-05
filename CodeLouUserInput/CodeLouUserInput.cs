@@ -25,6 +25,8 @@ namespace CodeLouUserInputLibrary
 
             do
             {
+                Console.Clear();
+
                 Continue = PlayGame();
 
                 if (Continue)
