@@ -20,8 +20,8 @@ namespace SimplePokerGame.Classes
 
             Deck deck = new Deck();
             deck.Shuffle();
-            List<Card> houseHand = deck.Deal(5);
-            List<Card> playerHand = deck.Deal(5);
+            Hand houseHand = deck.Deal(5);
+            Hand playerHand = deck.Deal(5);
 
             Console.WriteLine($"House Hand: {string.Join(",",houseHand.OrderBy(c => c.Weight).Select(c => c.ToString()).ToArray())}");
 
