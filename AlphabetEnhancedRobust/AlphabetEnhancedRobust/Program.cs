@@ -24,7 +24,7 @@ namespace AlphabetEnhancedRobust
 
                 string menuSelection;
                 bool validInput = false;
-                if (validInput = TryPrompt4MenuItem("Please select one of the following options:", menu, out menuSelection, 5))
+                if (validInput = TryPrompt4MenuItem<string>("Please select one of the following options:", menu, out menuSelection, 5))
                 {
                     switch (menuSelection)
                     {
