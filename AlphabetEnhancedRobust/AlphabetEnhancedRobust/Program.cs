@@ -36,7 +36,7 @@ namespace AlphabetEnhancedRobust
                             break;
                         case "S":
                             int numberToSkip;
-                            if (validInput = TryPrompt4Number(out numberToSkip, "What would you like the skip index to be: ", 5, 2, 25))
+                            if (validInput = TryPrompt4Integer(out numberToSkip, "What would you like the skip index to be: ", 5, 2, 25))
                                 Console.WriteLine($"Here's the alphabet with a skip index of {numberToSkip}: {CreateAlphabetSkip(numberToSkip)}");
                             break;
                         case "Q":
@@ -149,7 +149,7 @@ namespace AlphabetEnhancedRobust
         }
 
         // maxAttempts = 0 means unlimited
-        static bool TryPrompt4Number(out int value, string prompt = "", uint maxAttempts = 0, int minValue = int.MinValue, int maxValue = int.MaxValue)
+        static bool TryPrompt4Integer(out int value, string prompt = "", uint maxAttempts = 0, int minValue = int.MinValue, int maxValue = int.MaxValue)
         {
             if (minValue > maxValue)
                 throw new ArgumentException("minValue must be <= maxValue");
