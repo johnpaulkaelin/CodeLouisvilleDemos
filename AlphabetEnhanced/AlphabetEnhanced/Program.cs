@@ -10,6 +10,9 @@ namespace AlphabetEnhanced
         {
             DateTime startTime = DateTime.Now;
 
+            Console.Write($"Welcome to The Alphabet App!  Press any key to continue...");
+            Console.ReadKey();
+
             bool quit = false;
             do
             {
