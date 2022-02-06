@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using CodeLouisvilleLibrary;
 
 namespace AlphabetUltimate.Classes
 {
-    public class AlphabetGame : CodeLouisvilleAppBase
+    public class AlphabetGameAdvanced : CodeLouisvilleAppBase
     {
-        public AlphabetGame() : base("The Alphabet Game")
+        public AlphabetGameAdvanced() : base("The Alphabet Game - Advanced")
         {
 
         }
 
         public override bool PlayGame()
         {
+
             bool quit = false;
 
             Console.Clear();
@@ -24,33 +27,35 @@ namespace AlphabetUltimate.Classes
             menu.Add(new KeyValuePair<string, string>("S", "Print the alphabet with some letters skipped"));
             menu.Add(new KeyValuePair<string, string>("Q", "Quit"));
 
-            string menuSelection = Prompt4MenuItem("Please select one of the following options:", menu);
-
-            switch (menuSelection)
+            string menuSelection;
+            bool validInput = false;
+            if (validInput = TryPrompt4MenuItem<string>("Please select one of the following options:", menu, out menuSelection, 5))
             {
-                case "A":
-                    Console.WriteLine($"Here's the alphabet: {CreateAlphabet()}");
-                    break;
-                case "Z":
-                    Console.WriteLine($"Here's the alphabet backwards: {CreateAlphabetBackwards()}");
-                    break;
-                case "S":
-                    int numberToSkip = Prompt4Integer("What would you like the skip index to be (between 2 and 25): ");
-                    if (numberToSkip < 2 || numberToSkip > 25)
-                        Console.WriteLine("Invalid entry.  Next time, please enter a number between 2 and 25.");
-                    else
-                        Console.WriteLine($"Here's the alphabet with a skip index of {numberToSkip}: {CreateAlphabetSkip(numberToSkip)}");
-                    break;
-                case "Q":
-                    quit = true;
-                    break;
-                default:
-                    Console.WriteLine("Your selection was invalid.");
-                    break;
+                switch (menuSelection)
+                {
+                    case "A":
+                        Console.WriteLine($"Here's the alphabet: {CreateAlphabet()}");
+                        break;
+                    case "Z":
+                        Console.WriteLine($"Here's the alphabet backwards: {CreateAlphabetBackwards()}");
+                        break;
+                    case "S":
+                        int numberToSkip;
+                        if (validInput = TryPrompt4Integer(out numberToSkip, "What would you like the skip index to be: ", 5, 2, 25))
+                            Console.WriteLine($"Here's the alphabet with a skip index of {numberToSkip}: {CreateAlphabetSkip(numberToSkip)}");
+                        break;
+                    case "Q":
+                        quit = true;
+                        break;
+                }
             }
+
+            if (!validInput)
+                Console.WriteLine("\nSorry your input was not valid.  Maybe you can try again.");
 
             return !quit;
         }
+
 
         private string CreateAlphabet()
         {
