@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlphabetUltimate", "AlphabetUltimate\AlphabetUltimate.csproj", "{607C1E5A-71CC-4E7E-A044-124B5D6831A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLouisvilleLibrary", "..\CodeLouUserInput\CodeLouisvilleLibrary.csproj", "{E9559FE7-4F06-4286-9195-BDC9CCBFDB1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLouisvilleLibrary", "..\CodeLouisvilleLibrary\CodeLouisvilleLibrary.csproj", "{E9559FE7-4F06-4286-9195-BDC9CCBFDB1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
