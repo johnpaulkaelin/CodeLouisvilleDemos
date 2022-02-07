@@ -9,11 +9,11 @@ namespace CodeLouisvilleLibrary
     public interface ICodeLouisvilleAppSimple
     {
 
-        public int Prompt4Integer(string prompt);
+        int Prompt4Integer(string prompt);
 
-        public bool PromptYesNo(string prompt);
+        bool PromptYesNo(string prompt);
 
-        public string Prompt4MenuItem(string prompt, List<KeyValuePair<string, string>> menu);
+        string Prompt4MenuItem(string prompt, List<KeyValuePair<string, string>> menu);
 
     }
 }

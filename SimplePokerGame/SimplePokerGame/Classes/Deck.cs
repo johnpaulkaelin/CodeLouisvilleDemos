@@ -21,19 +21,23 @@ namespace SimplePokerGame.Classes
             cards = cards.OrderBy(c => Guid.NewGuid()).ToList();
         }
 
-        public Hand Deal(byte numberOfCards)
+        public List<Hand> Deal(byte numberOfPlayers, byte numberOfCardsEach)
         {
-            if (cards.Count < numberOfCards) throw new ApplicationException("Not enough cards for requested Deal");
+            if (cards.Count < numberOfPlayers * numberOfCardsEach) throw new ApplicationException("Not enough cards for requested Deal");
 
-            Hand hand = new Hand();
+            List<Hand> deal = new List<Hand>();
 
-            for(byte i = 0; i < numberOfCards; i++)
+            for(byte i = 0; i < numberOfCardsEach; i++)
             {
-                hand.Add(cards[0]);
-                cards.RemoveAt(0);
+                for (byte j = 0; j < numberOfPlayers; j++)
+                {
+                    if (deal.Count < j + 1) deal.Add(new Hand());
+                    deal[j].Add(cards[0]);
+                    cards.RemoveAt(0);
+                }
             }
 
-            return hand;
+            return deal;
         }
 
         private void Reset()

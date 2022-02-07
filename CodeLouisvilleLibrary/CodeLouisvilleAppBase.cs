@@ -9,7 +9,6 @@ namespace CodeLouisvilleLibrary
     public abstract class CodeLouisvilleAppBase : ICodeLouisvilleAppSimple, ICodeLouisvilleAppAdvanced
     {
         public string AppName { get; set; }
-        protected bool Continue { get; set; }
 
         public CodeLouisvilleAppBase(string appName)
         {
@@ -24,16 +23,12 @@ namespace CodeLouisvilleLibrary
 
             Welcome();
 
+            bool Continue = true;
             do
             {
                 Console.Clear();
 
-                Continue = PlayGame();
-
-                if (Continue)
-                {
-                    Continue  = PromptYesNo($"\nDo you want to continue playing {AppName} (Y or N)?");
-                }
+                Continue = PlayGame() && PromptYesNo($"\nDo you want to continue playing {AppName} (Y or N)?");
 
             } while (Continue);
 
@@ -57,34 +52,38 @@ namespace CodeLouisvilleLibrary
         {
             TimeSpan timeSpent = endTime - startTime;
 
-            List<string> timeSpentStringParts = new List<string>();
-            if (timeSpent.Days > 0)
-                timeSpentStringParts.Add($"{timeSpent.Days} Day{(timeSpent.Days > 1 ? "s" : "")}");
-            if (timeSpent.Hours > 0)
-                timeSpentStringParts.Add($"{timeSpent.Hours} Hour{(timeSpent.Hours > 1 ? "s" : "")}");
-            if (timeSpent.Minutes > 0)
-                timeSpentStringParts.Add($"{timeSpent.Minutes} Minute{(timeSpent.Minutes > 1 ? "s" : "")}");
-            if (timeSpent.Seconds > 0)
-                timeSpentStringParts.Add($"{timeSpent.Seconds} Second{(timeSpent.Seconds > 1 ? "s" : "")}");
-            if (timeSpent.Milliseconds > 0)
-                timeSpentStringParts.Add($"{timeSpent.Milliseconds} Millisecond{(timeSpent.Milliseconds > 1 ? "s" : "")}");
+            return $"{timeSpent.Days} Day(s), {timeSpent.Hours} Hour(s), {timeSpent.Minutes} Minute(s), {timeSpent.Seconds} Second(s), and {timeSpent.Milliseconds} Millisecond(s)";
 
-            StringBuilder timeSpentString = new StringBuilder("");
+            //List<string> timeSpentStringParts = new List<string>();
+            //if (timeSpent.Days > 0)
+            //    timeSpentStringParts.Add($"{timeSpent.Days} Day{(timeSpent.Days > 1 ? "s" : "")}");
+            //if (timeSpent.Hours > 0)
+            //    timeSpentStringParts.Add($"{timeSpent.Hours} Hour{(timeSpent.Hours > 1 ? "s" : "")}");
+            //if (timeSpent.Minutes > 0)
+            //    timeSpentStringParts.Add($"{timeSpent.Minutes} Minute{(timeSpent.Minutes > 1 ? "s" : "")}");
+            //if (timeSpent.Seconds > 0)
+            //    timeSpentStringParts.Add($"{timeSpent.Seconds} Second{(timeSpent.Seconds > 1 ? "s" : "")}");
+            //if (timeSpent.Milliseconds > 0)
+            //    timeSpentStringParts.Add($"{timeSpent.Milliseconds} Millisecond{(timeSpent.Milliseconds > 1 ? "s" : "")}");
 
-            if (timeSpentStringParts.Count > 0)
-            {
-                timeSpentString.Append(timeSpentStringParts[0]);
+            //StringBuilder timeSpentString = new StringBuilder("");
 
-                for (int i = 1; i < timeSpentStringParts.Count; i++)
-                {
-                    if (i == timeSpentStringParts.Count - 1) // if the last entry in the list
-                        timeSpentString.Append($" and {timeSpentStringParts[i]}");
-                    else
-                        timeSpentString.Append($", {timeSpentStringParts[i]}");
-                }
-            }
-            return timeSpentString.ToString();
+            //if (timeSpentStringParts.Count > 0)
+            //{
+            //    timeSpentString.Append(timeSpentStringParts[0]);
+
+            //    for (int i = 1; i < timeSpentStringParts.Count; i++)
+            //    {
+            //        if (i == timeSpentStringParts.Count - 1) // if the last entry in the list
+            //            timeSpentString.Append($" and {timeSpentStringParts[i]}");
+            //        else
+            //            timeSpentString.Append($", {timeSpentStringParts[i]}");
+            //    }
+            //}
+            //return timeSpentString.ToString();
         }
+
+        #region "Utility" methods.  These could be static
 
         public int Prompt4Integer(string prompt)
         {
@@ -289,5 +288,6 @@ namespace CodeLouisvilleLibrary
                 }
             }
         }
+        #endregion
     }
 }
