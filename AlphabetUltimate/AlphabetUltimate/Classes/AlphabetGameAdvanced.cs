@@ -18,32 +18,30 @@ namespace AlphabetUltimate.Classes
 
             bool quit = false;
 
-            Console.Clear();
+            var menu = new Menu<char>();
+            menu.AddMenuItem('A', "Print the alphabet");
+            menu.AddMenuItem('Z', "Print the alphabet backwards");
+            menu.AddMenuItem('S', "Print the alphabet with some letters skipped");
+            menu.AddMenuItem('Q', "Quit");
 
-            List<KeyValuePair<string, string>> menu = new List<KeyValuePair<string, string>>();
-            menu.Add(new KeyValuePair<string, string>("A", "Print the alphabet"));
-            menu.Add(new KeyValuePair<string, string>("Z", "Print the alphabet backwards"));
-            menu.Add(new KeyValuePair<string, string>("S", "Print the alphabet with some letters skipped"));
-            menu.Add(new KeyValuePair<string, string>("Q", "Quit"));
-
-            string menuSelection;
+            char menuSelection;
             bool validInput = false;
-            if (validInput = TryPrompt4MenuItem<string>("Please select one of the following options:", menu, out menuSelection, 5))
+            if (validInput = TryPrompt4MenuItem<char>("Please select one of the following options:", menu, out menuSelection, 5))
             {
                 switch (menuSelection)
                 {
-                    case "A":
-                        Console.WriteLine($"Here's the alphabet: {CreateAlphabet()}");
+                    case 'A':
+                        Console.WriteLine($"\nHere's the alphabet: {CreateAlphabet()}");
                         break;
-                    case "Z":
-                        Console.WriteLine($"Here's the alphabet backwards: {CreateAlphabetBackwards()}");
+                    case 'Z':
+                        Console.WriteLine($"\nHere's the alphabet backwards: {CreateAlphabetBackwards()}");
                         break;
-                    case "S":
+                    case 'S':
                         int numberToSkip;
-                        if (validInput = TryPrompt4Integer(out numberToSkip, "What would you like the skip index to be: ", 5, 2, 25))
-                            Console.WriteLine($"Here's the alphabet with a skip index of {numberToSkip}: {CreateAlphabetSkip(numberToSkip)}");
+                        if (validInput = TryPrompt4Integer(out numberToSkip, "\nWhat would you like the skip index to be: ", 5, 2, 25))
+                            Console.WriteLine($"\nHere's the alphabet with a skip index of {numberToSkip}: {CreateAlphabetSkip(numberToSkip)}");
                         break;
-                    case "Q":
+                    case 'Q':
                         quit = true;
                         break;
                 }

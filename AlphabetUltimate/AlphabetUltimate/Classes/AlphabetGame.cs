@@ -16,13 +16,11 @@ namespace AlphabetUltimate.Classes
         {
             bool quit = false;
 
-            Console.Clear();
-
-            List<KeyValuePair<string, string>> menu = new List<KeyValuePair<string, string>>();
-            menu.Add(new KeyValuePair<string, string>("A", "Print the alphabet"));
-            menu.Add(new KeyValuePair<string, string>("Z", "Print the alphabet backwards"));
-            menu.Add(new KeyValuePair<string, string>("S", "Print the alphabet with some letters skipped"));
-            menu.Add(new KeyValuePair<string, string>("Q", "Quit"));
+            Menu menu = new Menu();
+            menu.AddMenuItem("A", "Print the alphabet");
+            menu.AddMenuItem("Z", "Print the alphabet backwards");
+            menu.AddMenuItem("S", "Print the alphabet with some letters skipped");
+            menu.AddMenuItem("Q", "Quit");
 
             string menuSelection = Prompt4MenuItem("Please select one of the following options:", menu);
 
@@ -47,6 +45,13 @@ namespace AlphabetUltimate.Classes
                 default:
                     Console.WriteLine("Your selection was invalid.");
                     break;
+            }
+
+            if (!quit)
+            {
+                Console.Write("\nPress any key to continue.");
+                Console.ReadKey();
+                Console.Clear();
             }
 
             return !quit;

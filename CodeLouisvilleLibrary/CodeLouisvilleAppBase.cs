@@ -6,9 +6,11 @@ using System.Text;
 namespace CodeLouisvilleLibrary
 {
 
-    public abstract class CodeLouisvilleAppBase : ICodeLouisvilleAppSimple, ICodeLouisvilleAppAdvanced
+    public abstract class CodeLouisvilleAppBase
     {
         public string AppName { get; set; }
+        private DateTime StartDate { get; set; }
+        private DateTime EndDate { get; set; }
 
         public CodeLouisvilleAppBase(string appName)
         {
@@ -19,21 +21,20 @@ namespace CodeLouisvilleLibrary
 
         public void Run()
         {
-            DateTime startDate = DateTime.Now;
+            StartDate = DateTime.Now;
 
             Welcome();
 
+            Console.Clear();
+
             bool Continue = true;
-            do
+            while(Continue)
             {
-                Console.Clear();
+                Continue = PlayGame();
+            }
 
-                Continue = PlayGame() && PromptYesNo($"\nDo you want to continue playing {AppName} (Y or N)?");
-
-            } while (Continue);
-
-            DateTime endDate = DateTime.Now;
-            Goodbye(startDate, endDate);
+            EndDate = DateTime.Now;
+            Goodbye();
         }
 
         private void Welcome()
@@ -42,9 +43,9 @@ namespace CodeLouisvilleLibrary
             Console.ReadKey();
         }
 
-        private void Goodbye(DateTime startTime, DateTime endTime)
+        private void Goodbye()
         {
-            Console.WriteLine($"\nYou spent {CreateTimeSpentString(startTime, endTime)} playing {AppName}.");
+            Console.WriteLine($"\nYou spent {CreateTimeSpentString(StartDate, EndDate)} playing {AppName}.");
             Console.WriteLine("I hope you enjoyed it and will come back again.");
         }
 
@@ -83,9 +84,9 @@ namespace CodeLouisvilleLibrary
             //return timeSpentString.ToString();
         }
 
-        #region "Utility" methods.  These could be static
+        #region "Utility" methods. 
 
-        public int Prompt4Integer(string prompt)
+        public static int Prompt4Integer(string prompt)
         {
             int value;
 
@@ -98,27 +99,7 @@ namespace CodeLouisvilleLibrary
             return value;
         }
 
-        public string Prompt4MenuItem(string prompt, List<KeyValuePair<string, string>> menu)
-        {
-            Console.WriteLine(prompt);
-            // this is the menu
-            foreach (KeyValuePair<string, string> menuItem in menu)
-            {
-                Console.WriteLine($"\t{menuItem.Key.ToString()}: {menuItem.Value}");
-            }
-            Console.Write("Selection: ");
-            string userSelection = Console.ReadLine();
-
-            foreach (KeyValuePair<string, string> menuitem in menu)
-            {
-                if (menuitem.Key.ToUpper() == userSelection.ToUpper())
-                    return menuitem.Key;
-            }
-
-            return "";
-        }
-
-        public bool PromptYesNo(string prompt)
+        public static bool Prompt4YesNo(string prompt)
         {
             string userInput = "";
 
@@ -131,7 +112,27 @@ namespace CodeLouisvilleLibrary
             return userInput.ToUpper() == "Y";
         }
 
-        public bool TryPrompt4Integer(out int value, string prompt = "", uint maxAttempts = 0, int minValue = int.MinValue, int maxValue = int.MaxValue)
+        public static string Prompt4MenuItem(string prompt, Menu menu)
+        {
+            Console.WriteLine(prompt);
+            // this is the menu
+            foreach (KeyValuePair<string, string> menuItem in menu.GetMenuItems())
+            {
+                Console.WriteLine($"\t{menuItem.Key.ToString()}: {menuItem.Value}");
+            }
+            Console.Write("Selection: ");
+            string userSelection = Console.ReadLine();
+
+            foreach (KeyValuePair<string, string> menuitem in menu.GetMenuItems())
+            {
+                if (menuitem.Key.ToUpper() == userSelection.ToUpper())
+                    return menuitem.Key;
+            }
+
+            return "";
+        }
+
+        public static bool TryPrompt4Integer(out int value, string prompt = "", uint maxAttempts = 0, int minValue = int.MinValue, int maxValue = int.MaxValue)
         {
             if (minValue > maxValue)
                 throw new ArgumentException("minValue must be <= maxValue");
@@ -187,7 +188,7 @@ namespace CodeLouisvilleLibrary
             return success;
         }
 
-        public bool TryPromptYesNo(string prompt, out bool response, uint maxAttempts = 0, string yesResponse = "Y", string noResponse = "N")
+        public static bool TryPrompt4YesNo(string prompt, out bool response, uint maxAttempts = 0, string yesResponse = "Y", string noResponse = "N")
         {
             if (string.IsNullOrWhiteSpace(prompt))
                 prompt = $"Please answer Yes ({yesResponse}) or No ({noResponse}): ";
@@ -227,7 +228,7 @@ namespace CodeLouisvilleLibrary
             return success;
         }
 
-        public bool TryPrompt4MenuItem<T>(string prompt, List<KeyValuePair<T, string>> menu, out T menuSelection, uint maxAttempts = 0)
+        public static bool TryPrompt4MenuItem<T>(string prompt, Menu<T> menu, out T menuSelection, uint maxAttempts = 0)
         {
             if (string.IsNullOrWhiteSpace(prompt))
                 prompt = "Please select one of the following options:";
@@ -247,17 +248,17 @@ namespace CodeLouisvilleLibrary
 
                 Console.WriteLine(prompt);
                 // this is the menu
-                foreach (KeyValuePair<T, string> menuItem in menu)
+                foreach (KeyValuePair<T, string> menuItem in menu.GetMenuItems())
                 {
                     Console.WriteLine($"\t{menuItem.Key.ToString()}: {menuItem.Value}");
                 }
                 Console.Write("Selection: ");
                 string userSelection = Console.ReadLine();
 
-                if (menu.Any(mi => mi.Key.ToString().ToUpper() == userSelection.ToUpper()))
+                if (menu.GetMenuItems().Any(mi => mi.Key.ToString().ToUpper() == userSelection.ToUpper()))
                 {
                     success = true;
-                    menuSelection = menu.FirstOrDefault(mi => mi.Key.ToString() == userSelection.ToUpper()).Key;
+                    menuSelection = menu.GetMenuItems().FirstOrDefault(mi => mi.Key.ToString() == userSelection.ToUpper()).Key;
                 }
                 else
                     Console.WriteLine($"{userSelection} is not an available option");
@@ -273,7 +274,7 @@ namespace CodeLouisvilleLibrary
             return success;
         }
 
-        private void WriteRetryPrompt(uint attempt, uint maxAttempts)
+        private static void WriteRetryPrompt(uint attempt, uint maxAttempts)
         {
             if (maxAttempts > 0 && attempt <= maxAttempts)
             {

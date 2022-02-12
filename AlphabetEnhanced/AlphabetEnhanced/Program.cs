@@ -18,13 +18,21 @@ namespace AlphabetEnhanced
             {
                 Console.Clear();
 
-                List<KeyValuePair<string, string>> menu = new List<KeyValuePair<string, string>>();
-                menu.Add(new KeyValuePair<string, string>("A", "Print the alphabet"));
-                menu.Add(new KeyValuePair<string, string>("Z", "Print the alphabet backwards"));
-                menu.Add(new KeyValuePair<string, string>("S", "Print the alphabet with some letters skipped"));
-                menu.Add(new KeyValuePair<string, string>("Q", "Quit"));
+                List<KeyValuePair<char, string>> menuChar = new List<KeyValuePair<char, string>>();
+                menuChar.Add(new KeyValuePair<char, string>('A', "Print the alphabet"));
+                menuChar.Add(new KeyValuePair<char, string>('Z', "Print the alphabet backwards"));
+                menuChar.Add(new KeyValuePair<char, string>('S', "Print the alphabet with some letters skipped"));
+                menuChar.Add(new KeyValuePair<char, string>('Q', "Quit"));
 
-                string menuSelection = Prompt4MenuItem("Please select one of the following options:", menu);
+                char menuCharSelection = Prompt4MenuItem("Please select one of the following options:", menuChar);
+
+                List<KeyValuePair<int, string>> menuInt = new List<KeyValuePair<int, string>>();
+                menuInt.Add(new KeyValuePair<int, string>(1, "Print the alphabet"));
+                menuInt.Add(new KeyValuePair<int, string>(2, "Print the alphabet backwards"));
+                menuInt.Add(new KeyValuePair<int, string>(3, "Print the alphabet with some letters skipped"));
+                menuInt.Add(new KeyValuePair<int, string>(99, "Quit"));
+
+                int menuIntSelection = Prompt4MenuItem("Please select one of the following options:", menuInt);
 
                 switch (menuSelection)
                 {
@@ -98,24 +106,24 @@ namespace AlphabetEnhanced
             return alphabetSkipped;
         }
 
-        static string Prompt4MenuItem(string prompt, List<KeyValuePair<string, string>> menu)
+        static T Prompt4MenuItem<T>(string prompt, List<KeyValuePair<T, string>> menu)
         {
             Console.WriteLine(prompt);
             // this is the menu
-            foreach(KeyValuePair<string, string> menuItem in menu)
+            foreach(KeyValuePair<T, string> menuItem in menu)
             {
                 Console.WriteLine($"\t{menuItem.Key.ToString()}: {menuItem.Value}");
             }
             Console.Write("Selection: ");
             string userSelection = Console.ReadLine();
 
-            foreach(KeyValuePair<string, string> menuitem in menu)
+            foreach(KeyValuePair<T, string> menuitem in menu)
             {
-                if (menuitem.Key.ToUpper() == userSelection.ToUpper())
+                if (menuitem.Key.ToString().ToUpper() == userSelection.ToUpper())
                     return menuitem.Key;
             }
 
-            return "";
+            return default(T);
         }
 
         static int Prompt4Integer(string prompt)
