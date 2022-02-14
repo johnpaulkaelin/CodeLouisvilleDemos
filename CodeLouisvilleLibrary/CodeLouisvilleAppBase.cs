@@ -112,24 +112,29 @@ namespace CodeLouisvilleLibrary
             return userInput.ToUpper() == "Y";
         }
 
-        public static string Prompt4MenuItem(string prompt, List<KeyValuePair<string, string>> menu)
+        public static T Prompt4MenuItem<T>(string prompt, List<KeyValuePair<T, string>> menu)
         {
             Console.WriteLine(prompt);
             // this is the menu
-            foreach (KeyValuePair<string, string> menuItem in menu)
+            foreach (KeyValuePair<T, string> menuItem in menu)
             {
                 Console.WriteLine($"\t{menuItem.Key.ToString()}: {menuItem.Value}");
             }
             Console.Write("Selection: ");
             string userSelection = Console.ReadLine();
 
-            foreach (KeyValuePair<string, string> menuitem in menu)
+            foreach (KeyValuePair<T, string> menuitem in menu)
             {
-                if (menuitem.Key.ToUpper() == userSelection.ToUpper())
+                if (menuitem.Key.ToString().ToUpper() == userSelection.ToUpper())
                     return menuitem.Key;
             }
 
-            return "";
+            return default(T);
+        }
+
+        public static T Prompt4MenuItem<T>(string prompt, Menu<T> menu)
+        {
+            return Prompt4MenuItem(prompt, menu.MenuItems);
         }
 
         public static string Prompt4MenuItem(string prompt, Menu menu)
