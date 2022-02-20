@@ -22,13 +22,11 @@ namespace AsyncDemo
             Task1();
             Task2();
 
-            Console.SetCursorPosition(10, 2);
-            Console.Write("Press any key to continue: ");
+            WriteAtPostion(10, 2, "Press any key to continue: ");
             Console.ReadKey();
             Console.Clear();
 
-            Console.SetCursorPosition(10, 2);
-            Console.Write("Press any key to watch me count 1-10 and 10-20 asynchronously using the exact same methods: ");
+            WriteAtPostion(10, 2,"Press any key to watch me count 1-10 and 10-20 asynchronously using the exact same methods: ");
             Console.ReadKey();
             Console.Clear();
 
@@ -38,13 +36,11 @@ namespace AsyncDemo
             tasks.Add(Task.Run(Task2));
             Task.WaitAll(tasks.ToArray());
 
-            Console.SetCursorPosition(10, 2);
-            Console.Write("Press any key to continue: ");
+            WriteAtPostion(10, 2, "Press any key to continue: ");
             Console.ReadKey();
             Console.Clear();
 
-            Console.SetCursorPosition(10, 2);
-            Console.Write("Press any key to watch me count 1-10 and 10-20 asynchronously using asynchronous versions of the methods: ");
+            WriteAtPostion(10, 2,"Press any key to watch me count 1-10 and 10-20 asynchronously using asynchronous versions of the methods: ");
             Console.ReadKey();
             Console.Clear();
 
@@ -55,8 +51,7 @@ namespace AsyncDemo
             await task1;
             await task2;
 
-            Console.SetCursorPosition(10, 2);
-            Console.Write("Press any key to quit: ");
+            WriteAtPostion(10, 2,"Press any key to quit: ");
             Console.ReadKey();
             Console.Clear();
         }
@@ -64,15 +59,8 @@ namespace AsyncDemo
         static void Task1()
         {
             for (int i = 1; i <= 10; i++)
-            {
-                // this lock is needed when running
-                // asynchronously because both
-                // tasks are competing for the console
-                lock (lockObject)
-                {
-                    Console.SetCursorPosition(10, 5);
-                    Console.Write(i);
-                }
+            {                
+                WriteAtPostion(10, 5, i.ToString());
                 Thread.Sleep(500);
             }
         }
@@ -81,14 +69,7 @@ namespace AsyncDemo
         {
             for (int i = 11; i <= 20; i++)
             {
-                // this lock is needed when running
-                // asynchronously because both
-                // tasks are competing for the console
-                lock (lockObject)
-                {
-                    Console.SetCursorPosition(10, 7);
-                    Console.WriteLine(i);
-                }
+                WriteAtPostion(10, 7, i.ToString());
                 Thread.Sleep(500);
             }
         }
@@ -97,14 +78,7 @@ namespace AsyncDemo
         {
             for (int i = 1; i <= 10; i++)
             {
-                // this lock is needed when running
-                // asynchronously because both
-                // tasks are competing for the console
-                lock (lockObject)
-                {
-                    Console.SetCursorPosition(10, 5);
-                    Console.Write(i);
-                }
+                WriteAtPostion(10, 5, i.ToString());
                 await Task.Delay(500);
             }
         }
@@ -113,15 +87,20 @@ namespace AsyncDemo
         {
             for (int i = 11; i <= 20; i++)
             {
-                // this lock is needed when running
-                // asynchronously because both
-                // tasks are competing for the console
-                lock (lockObject)
-                {
-                    Console.SetCursorPosition(10, 7);
-                    Console.WriteLine(i);
-                }
+                WriteAtPostion(10, 7, i.ToString());
                 await Task.Delay(500);
+            }
+        }
+
+        static void WriteAtPostion(int left, int top, string s)
+        {
+            // this lock is needed when running
+            // asynchronously because both
+            // tasks are competing for the console
+            lock (lockObject)
+            {
+                Console.SetCursorPosition(left, top);
+                Console.Write(s);
             }
         }
 
