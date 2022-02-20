@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace CodeLouisvilleLibrary
 {
 
     public abstract class CodeLouisvilleAppBase
     {
-        public string AppName { get; set; }
-        private DateTime StartDate { get; set; }
-        private DateTime EndDate { get; set; }
+        protected string AppName { get; private set; }
+        protected DateTime StartDate { get; private set; }
+        protected DateTime EndDate { get; private set; }
 
         public CodeLouisvilleAppBase(string appName)
         {
             AppName = appName;
         }
 
-        public abstract bool PlayGame();
+        protected abstract bool Main();
 
         public void Run()
         {
@@ -30,58 +31,56 @@ namespace CodeLouisvilleLibrary
             bool Continue = true;
             while(Continue)
             {
-                Continue = PlayGame();
+                Continue = Main();
             }
 
             EndDate = DateTime.Now;
             Goodbye();
         }
 
-        private void Welcome()
+        protected virtual void Welcome()
         {
             Console.Write($"Welcome to {AppName}!  Press any key to continue...");
             Console.ReadKey();
         }
 
-        private void Goodbye()
+        protected virtual void Goodbye()
         {
             Console.WriteLine($"\nYou spent {CreateTimeSpentString(StartDate, EndDate)} playing {AppName}.");
             Console.WriteLine("I hope you enjoyed it and will come back again.");
         }
 
-        private string CreateTimeSpentString(DateTime startTime, DateTime endTime)
+        protected string CreateTimeSpentString(DateTime startTime, DateTime endTime)
         {
             TimeSpan timeSpent = endTime - startTime;
 
-            return $"{timeSpent.Days} Day(s), {timeSpent.Hours} Hour(s), {timeSpent.Minutes} Minute(s), {timeSpent.Seconds} Second(s), and {timeSpent.Milliseconds} Millisecond(s)";
+            List<string> timeSpentStringParts = new List<string>();
+            if (timeSpent.Days > 0)
+                timeSpentStringParts.Add($"{timeSpent.Days} Day{(timeSpent.Days > 1 ? "s" : "")}");
+            if (timeSpent.Hours > 0)
+                timeSpentStringParts.Add($"{timeSpent.Hours} Hour{(timeSpent.Hours > 1 ? "s" : "")}");
+            if (timeSpent.Minutes > 0)
+                timeSpentStringParts.Add($"{timeSpent.Minutes} Minute{(timeSpent.Minutes > 1 ? "s" : "")}");
+            if (timeSpent.Seconds > 0)
+                timeSpentStringParts.Add($"{timeSpent.Seconds} Second{(timeSpent.Seconds > 1 ? "s" : "")}");
+            if (timeSpent.Milliseconds > 0)
+                timeSpentStringParts.Add($"{timeSpent.Milliseconds} Millisecond{(timeSpent.Milliseconds > 1 ? "s" : "")}");
 
-            //List<string> timeSpentStringParts = new List<string>();
-            //if (timeSpent.Days > 0)
-            //    timeSpentStringParts.Add($"{timeSpent.Days} Day{(timeSpent.Days > 1 ? "s" : "")}");
-            //if (timeSpent.Hours > 0)
-            //    timeSpentStringParts.Add($"{timeSpent.Hours} Hour{(timeSpent.Hours > 1 ? "s" : "")}");
-            //if (timeSpent.Minutes > 0)
-            //    timeSpentStringParts.Add($"{timeSpent.Minutes} Minute{(timeSpent.Minutes > 1 ? "s" : "")}");
-            //if (timeSpent.Seconds > 0)
-            //    timeSpentStringParts.Add($"{timeSpent.Seconds} Second{(timeSpent.Seconds > 1 ? "s" : "")}");
-            //if (timeSpent.Milliseconds > 0)
-            //    timeSpentStringParts.Add($"{timeSpent.Milliseconds} Millisecond{(timeSpent.Milliseconds > 1 ? "s" : "")}");
+            StringBuilder timeSpentString = new StringBuilder("");
 
-            //StringBuilder timeSpentString = new StringBuilder("");
+            if (timeSpentStringParts.Count > 0)
+            {
+                timeSpentString.Append(timeSpentStringParts[0]);
 
-            //if (timeSpentStringParts.Count > 0)
-            //{
-            //    timeSpentString.Append(timeSpentStringParts[0]);
-
-            //    for (int i = 1; i < timeSpentStringParts.Count; i++)
-            //    {
-            //        if (i == timeSpentStringParts.Count - 1) // if the last entry in the list
-            //            timeSpentString.Append($" and {timeSpentStringParts[i]}");
-            //        else
-            //            timeSpentString.Append($", {timeSpentStringParts[i]}");
-            //    }
-            //}
-            //return timeSpentString.ToString();
+                for (int i = 1; i < timeSpentStringParts.Count; i++)
+                {
+                    if (i == timeSpentStringParts.Count - 1) // if the last entry in the list
+                        timeSpentString.Append($" and {timeSpentStringParts[i]}");
+                    else
+                        timeSpentString.Append($", {timeSpentStringParts[i]}");
+                }
+            }
+            return timeSpentString.ToString();
         }
 
         #region "Utility" methods. 
@@ -287,6 +286,44 @@ namespace CodeLouisvilleLibrary
         public static bool TryPrompt4MenuItem<T>(string prompt, Menu<T> menu, out T menuSelection, uint maxAttempts = 0)
         {
             return TryPrompt4MenuItem(prompt, menu.MenuItems, out menuSelection, maxAttempts);
+        }
+
+        public static void Animate(string[] parts, int pause = 500, int repeat = 1, bool clearWhenComplete = true, bool slide = false)
+        {
+            int Left = Console.CursorLeft;
+            bool isCursorVisible = Console.CursorVisible;
+            Console.CursorVisible = false;
+            try
+            {
+                string prev = "";
+                for (int r = 0; r < repeat; r++)
+                {
+                    for (int i = 0; i < parts.Length; i++)
+                    {
+                        Console.SetCursorPosition(Console.CursorLeft - prev.Length, Console.CursorTop);
+                        if(slide && prev.Length > 0)
+                        {
+                            Console.Write(" ".PadLeft(prev.Length));
+                            Console.SetCursorPosition(Console.CursorLeft + prev.Length, Console.CursorTop);
+                        }
+                        Console.Write(parts[i].PadRight(prev.Length));
+                        prev = parts[i].PadRight(prev.Length);
+
+                        Thread.Sleep(pause);
+                    }
+                }
+
+                if(clearWhenComplete)
+                {
+                    Console.SetCursorPosition(Console.CursorLeft - prev.Length, Console.CursorTop);
+                    Console.Write(" ".PadLeft(prev.Length));
+                    Console.SetCursorPosition(Left, Console.CursorTop);
+                }
+            }
+            finally
+            {
+                Console.CursorVisible = isCursorVisible;
+            }
         }
 
         private static void WriteRetryPrompt(uint attempt, uint maxAttempts)

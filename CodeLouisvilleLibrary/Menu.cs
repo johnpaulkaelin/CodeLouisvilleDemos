@@ -12,7 +12,10 @@ namespace CodeLouisvilleLibrary
 
         internal List<KeyValuePair<T, string>>  MenuItems
         {
-            get;
+            get
+            {
+                return menuItems;
+            }
         }
 
         public void AddMenuItem(T menuKey, string menuText)
