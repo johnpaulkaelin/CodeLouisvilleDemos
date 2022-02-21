@@ -17,7 +17,7 @@ namespace AsyncDemo
             Console.Write("Press any key to watch me count 1-10 and 10-20 synchronously: ");
             Console.ReadKey();
             Console.Clear();
-           
+
             // call synchronously
             Task1();
             Task2();
@@ -26,7 +26,7 @@ namespace AsyncDemo
             Console.ReadKey();
             Console.Clear();
 
-            WriteAtPostion(10, 2,"Press any key to watch me count 1-10 and 10-20 asynchronously using the exact same methods: ");
+            WriteAtPostion(10, 2, "Press any key to watch me count 1-10 and 10-20 asynchronously using the exact same methods: ");
             Console.ReadKey();
             Console.Clear();
 

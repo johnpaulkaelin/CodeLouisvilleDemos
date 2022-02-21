@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Shapes.Classes;
+using Shapes.Interfaces;
 
 namespace Shapes
 {
@@ -7,14 +9,21 @@ namespace Shapes
     {
         static void Main(string[] args)
         {
-            Circle c1 = new Circle(2.5, ConsoleColor.Black, ConsoleColor.DarkRed);
-            Console.WriteLine($"c1's circumference is {c1.Perimiter()}. c1's area is {c1.Area()}");
+            var shapes = new List<IShape>();
 
-            Rectangle r1 = new Rectangle(5.25, 8.75, ConsoleColor.DarkMagenta, ConsoleColor.DarkCyan);
-            Console.WriteLine($"r1's perimiter is {r1.Perimiter()}. r1's area is {r1.Area()}");
+            shapes.Add(new Circle(2.5));
+            shapes.Add(new Rectangle(2.3, 4.75));
+            shapes.Add(new Circle(.75));
+            shapes.Add(new Triangle(2, 3, 4));
+            shapes.Add(new Triangle(7, 9, 11));
+            shapes.Add(new Triangle(2.5, 3.25, 5.5));
+            shapes.Add(new Rectangle(23, 75));
+            shapes.Add(new Circle(53));
 
-            Triangle t1 = new Triangle(2, 3, 4, ConsoleColor.Gray, ConsoleColor.DarkCyan);
-            Console.WriteLine($"t1's perimiter is {t1.Perimiter()}. t1's area is {t1.Area()}");
+            foreach(IShape shape in shapes)
+            {
+                Console.WriteLine(shape.ToString() + $" has Area = {shape.Area} and Perimiter = {shape.Perimiter}");
+            }
         }
     }
 }

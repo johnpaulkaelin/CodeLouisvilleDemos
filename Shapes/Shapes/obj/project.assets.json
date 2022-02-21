@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kaeljo01\\Source\\Repos\\Shapes\\Shapes\\Shapes.csproj",
+      "projectUniqueName": "C:\\Users\\kaeljo01\\Source\\Repos\\CodeLouisvilleDemos\\Shapes\\Shapes\\Shapes.csproj",
       "projectName": "Shapes",
-      "projectPath": "C:\\Users\\kaeljo01\\Source\\Repos\\Shapes\\Shapes\\Shapes.csproj",
+      "projectPath": "C:\\Users\\kaeljo01\\Source\\Repos\\CodeLouisvilleDemos\\Shapes\\Shapes\\Shapes.csproj",
       "packagesPath": "C:\\Users\\kaeljo01\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kaeljo01\\Source\\Repos\\Shapes\\Shapes\\obj\\",
+      "outputPath": "C:\\Users\\kaeljo01\\Source\\Repos\\CodeLouisvilleDemos\\Shapes\\Shapes\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

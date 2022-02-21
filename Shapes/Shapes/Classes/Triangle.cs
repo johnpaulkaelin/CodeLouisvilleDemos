@@ -1,18 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Shapes.AbstractClasses;
+using System;
 namespace Shapes.Classes
 {
-    public class Triangle : Shape
+    public class Triangle : ShapeBase
     {
+        public override double Area
+        {
+            get
+            {
+                double s = (Side1 + Side2 + Side3) / 2;
+                return Math.Sqrt(s * (s - Side1) * (s - Side2) * (s - Side3));
+            }
+        }
+
+        public override double Perimiter
+        {
+            get
+            {
+                return Side1 + Side2 + Side3;
+            }
+        }
+        public override string Description
+        {
+            get
+            {
+                return $"Side lengths ({Side1}, {Side2}, {Side3})";
+            }
+        }
+
         public double Side1 { get; }
         public double Side2 { get; }
         public double Side3 { get; }
 
-        public Triangle(double side1, double side2, double side3, ConsoleColor borderColor, ConsoleColor fillColor) : base(borderColor, fillColor)
+        public Triangle(double side1, double side2, double side3) : base("Triangle")
         {
             Side1 = side1;
             Side2 = side2;
@@ -20,17 +40,6 @@ namespace Shapes.Classes
 
             if (!CheckSides())
                 throw new ArgumentException($"These 3 sides do NOT make a triangle ({side1},{side2},{side3})");
-        }
-
-        public override double Area()
-        {
-            double s = (Side1 + Side2 + Side3) / 2;
-            return Math.Sqrt(s * (s - Side1) * (s - Side2) * (s - Side3));
-        }
-
-        public override double Perimiter()
-        {
-            return Side1 + Side2 + Side3;
         }
 
         private bool CheckSides()

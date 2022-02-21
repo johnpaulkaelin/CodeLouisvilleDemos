@@ -8,8 +8,14 @@ namespace Shapes.Interfaces
 {
     interface IShape
     {
-        public double Area();
-        public double Perimiter();
+        public string Name { get; }
+
+        public string Description { get; }
+
+        public double Area { get;  }
+
+        public double Perimiter { get; }
+
 
     }
 }
